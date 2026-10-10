@@ -1,0 +1,24 @@
+name: Uptime
+
+on:
+  schedule:
+    - cron: "2-59/5 * * * *"
+  workflow_dispatch:
+    inputs:
+      base:
+        description: "Domaine à tester (vide = production)"
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tester la boutique, l'API et le panier
+        env:
+          BASE: ${{ inputs.base || 'belaconflans.com' }}
+        run: ./probe.sh "$BASE"
