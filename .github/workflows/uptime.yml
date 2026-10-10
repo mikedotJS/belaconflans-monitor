@@ -21,4 +21,4 @@ jobs:
       - name: Tester la boutique, l'API et le panier
         env:
           BASE: ${{ inputs.base || 'belaconflans.com' }}
-        run: ./probe.sh "$BASE"
+        run: bash probe.sh "$BASE"
